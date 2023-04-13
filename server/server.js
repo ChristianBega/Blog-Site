@@ -1,19 +1,18 @@
-// Set up server file :  
+// Set up server file :
 // a. express server
-// b. 
-
+// b.
 
 // require dotenv
 require("dotenv").config();
 // require express
 const express = require("express");
 // require apollo server
-const { ApolloServer } = require("apollo-server-express");
-// require path 
+const { ApolloServer } = require("@apollo/server");
+// require path
 const path = require("path");
 
 // require in auth middle ware
-// const { authMiddleware } = require("./utils/auth");
+const { authMiddleware } = require("./utils/auth");
 
 // require in typeDefs and resolvers
 const { typeDefs, resolvers } = require("./schemas");
@@ -26,7 +25,7 @@ const PORT = process.env.PORT || 3001;
 // setting express = app
 const app = express();
 
-// setting server to use ApolloServer - 
+// setting server to use ApolloServer -
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -42,7 +41,6 @@ if (process.env.NODE_ENV === "production") {
   app.get("/*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/build/index.html"));
   });
-
 }
 
 app.get("/", (req, res) => {
@@ -56,9 +54,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
   db.once("open", () => {
     app.listen(PORT, () => {
       console.log(`API server running on port http://localhost:${PORT}!`);
-      console.log(
-        `Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`
-      );
+      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
     });
   });
 };
