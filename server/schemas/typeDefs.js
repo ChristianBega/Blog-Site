@@ -29,6 +29,7 @@ const typeDefs = `
 
   type Mutation {
     addComment(blogPostId: ID!, commentText: String!): BlogPost
+    removeComment(blogPostId: ID!, commentId: ID!): BlogPost
   }
 `;
 

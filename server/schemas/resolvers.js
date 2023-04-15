@@ -40,6 +40,9 @@ const resolvers = {
         }
       );
     },
+    removeComment: async (parent, { blogPostId, commentId }) => {
+      return BlogPosts.findOneAndUpdate({ _id: blogPostId }, { $pull: { comments: { _id: commentId } } }, { new: true });
+    },
   },
 };
 
