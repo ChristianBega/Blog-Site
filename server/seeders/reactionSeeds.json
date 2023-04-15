@@ -1,0 +1,14 @@
+[
+  {
+    "creator": "Chris_TEST",
+    "commentText": "This is the comment a user would leave on as a reaction to another users blog post"
+  },
+  {
+    "creator": "Marisa_TEST",
+    "commentText": "This is the comment a user would leave on as a reaction to another users blog post"
+  },
+  {
+    "creator": "JohnDoe_TEST",
+    "commentText": "This is the comment a user would leave on as a reaction to another users blog post"
+  }
+]
