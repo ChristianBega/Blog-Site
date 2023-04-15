@@ -1,13 +1,11 @@
-// Set up server file :
-// a. express server
-// b.
-
+const { startStandaloneServer } = require("@apollo/server/standalone");
 // require dotenv
 require("dotenv").config();
 // require express
 const express = require("express");
 // require apollo server
 const { ApolloServer } = require("@apollo/server");
+
 // require path
 const path = require("path");
 
@@ -48,15 +46,13 @@ app.get("/", (req, res) => {
 });
 
 const startApolloServer = async (typeDefs, resolvers) => {
-  await server.start();
-  server.applyMiddleware({ app });
+  // server.applyMiddleware({ app });
 
-  db.once("open", () => {
-    app.listen(PORT, () => {
-      console.log(`API server running on port http://localhost:${PORT}!`);
-      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-    });
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: process.env.PORT },
   });
+  console.log(`API server running on port http://localhost:${PORT}!`);
+  console.log(`Use GraphQL at ${url}`);
 };
 
 startApolloServer(typeDefs, resolvers);
