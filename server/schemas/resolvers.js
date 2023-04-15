@@ -1,14 +1,16 @@
 const { AuthenticationError } = require("@apollo/server");
-const { User, Reactions } = require("../models");
+const { User, Reactions, BlogPosts } = require("../models");
 // const TotalSpending = require("../models/TotalSpending");
 // const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
+    // Finds all users
     getUser: async () => {
       return User.find();
     },
-    getReactions: async () => {
-      return Reactions.find();
+    // Finds all blog posts
+    getBlogPosts: async () => {
+      return BlogPosts.find();
     },
     // profile: async (parent, { profileId }) => {
     //   return Profile.findOne({ _id: profileId });

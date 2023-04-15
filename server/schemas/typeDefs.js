@@ -9,7 +9,7 @@ const typeDefs = `
     password: String
     email: String
   }
-  type getReactions {
+  type getBlogPosts {
     _id: ID
     blogPost: String
     creator: String
@@ -17,7 +17,7 @@ const typeDefs = `
   }
   type Query {
     getUser: [getUser]!
-    getReactions: [getReactions]
+    getBlogPosts: [getBlogPosts]
   }
 `;
 
