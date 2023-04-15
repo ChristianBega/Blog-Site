@@ -15,6 +15,26 @@ const blogPostSchema = new Schema({
     default: Date.now,
     get: (timestamp) => dateFormat(timestamp),
   },
+  comments: [
+    {
+      // creator: {
+      //   type: String,
+      //   required: true,
+      //   trim: true,
+      // },
+      commentText: {
+        type: String,
+        required: "You need to leave a comment!",
+        minLength: 1,
+        maxLength: 280,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      },
+    },
+  ],
 });
 
 const BlogPost = model("BlogPost", blogPostSchema);

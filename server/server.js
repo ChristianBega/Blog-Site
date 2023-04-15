@@ -49,7 +49,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
   // server.applyMiddleware({ app });
 
   const { url } = await startStandaloneServer(server, {
-    listen: { port: process.env.PORT },
+    listen: { port: process.env.PORT || 3001 },
   });
   console.log(`API server running on port http://localhost:${PORT}!`);
   console.log(`Use GraphQL at ${url}`);

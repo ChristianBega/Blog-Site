@@ -1,24 +1,42 @@
 const { gql } = require("@apollo/server");
 
-// Set up TypeDefs in backticks
 const typeDefs = `
   #graphql
-  type getUser {
+
+  type User {
     _id: ID
     username: String
     password: String
     email: String
   }
-  type getBlogPosts {
+  type BlogPost {
     _id: ID
     blogPost: String
     creator: String
     createdAt: String
+    comments: [Comment]!
   }
+  type Comment {
+    _id: ID
+    commentText: String
+    createdAt : String
+  }
+
   type Query {
-    getUser: [getUser]!
-    getBlogPosts: [getBlogPosts]
+    User: [User]!
+    BlogPost: [BlogPost]
+  }
+
+  type Mutation {
+    addComment(blogPostId: ID!, commentText: String!): BlogPost
   }
 `;
 
 module.exports = typeDefs;
+
+// type getReactions {
+//     _id: ID
+//     creator : String
+//     createdAt : String
+//   }
+// getReactions: [getReactions];
