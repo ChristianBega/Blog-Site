@@ -9,8 +9,15 @@ const typeDefs = `
     password: String
     email: String
   }
+  type getReactions {
+    _id: ID
+    blogPost: String
+    creator: String
+    createdAt: String
+  }
   type Query {
     getUser: [getUser]!
+    getReactions: [getReactions]
   }
 `;
 
