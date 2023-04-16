@@ -9,6 +9,7 @@ const typeDefs = `
     password: String
     email: String
   }
+
   type BlogPost {
     _id: ID
     blogPost: String
@@ -16,6 +17,7 @@ const typeDefs = `
     createdAt: String
     comments: [Comment]!
   }
+
   type Comment {
     _id: ID
     commentText: String
@@ -23,17 +25,23 @@ const typeDefs = `
   }
 
   type Query {
-    User: [User]!
+    Users: [User]!
+    User(userId: ID!): User
     BlogPost: [BlogPost]
   }
 
   type Mutation {
+
+    addUser(username: String!, email: String!, password: String!): User
     addComment(blogPostId: ID!, commentText: String!): BlogPost
     removeComment(blogPostId: ID!, commentId: ID!): BlogPost
   }
-`;
+  `;
+  
+  module.exports = typeDefs;
+  
+// removeUser(userID: ID!): User
 
-module.exports = typeDefs;
 
 // type getReactions {
 //     _id: ID
