@@ -45,14 +45,18 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
-const startApolloServer = async (typeDefs, resolvers) => {
-  // server.applyMiddleware({ app });
-
-  const { url } = await startStandaloneServer(server, {
-    listen: { port: process.env.PORT || 3001 },
-  });
+startStandaloneServer(server, {
+  context: ({ req }) => {
+    async () => ({
+      db: await client.connect(db),
+    });
+    // const { cache } = server;
+    return {
+      token: req.headers?.token,
+    };
+  },
+  listen: { port: PORT },
+}).then(({ url }) => {
   console.log(`API server running on port http://localhost:${PORT}!`);
   console.log(`Use GraphQL at ${url}`);
-};
-
-startApolloServer(typeDefs, resolvers);
+});
