@@ -1,6 +1,5 @@
 const { AuthenticationError } = require("@apollo/server");
 const { User, Reactions, BlogPosts } = require("../models");
-// const TotalSpending = require("../models/TotalSpending");
 // const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
@@ -12,6 +11,14 @@ const resolvers = {
     User: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
     },
+    // Finds the client side user
+    // me: async (parent, args, context) => {
+    //   if (context.user) {
+    //     return Profile.findOne({ _id: context.user._id });
+    //   }
+    //   // throw new AuthenticationError("You need to be logged in!");
+    // },
+
     // Finds all blog posts
     BlogPost: async () => {
       return BlogPosts.find();

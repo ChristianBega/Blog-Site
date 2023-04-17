@@ -27,6 +27,7 @@ const typeDefs = `
   type Query {
     Users: [User]!
     User(userId: ID!): User
+    me: User
     BlogPost: [BlogPost]
   }
 
@@ -37,11 +38,10 @@ const typeDefs = `
     removeComment(blogPostId: ID!, commentId: ID!): BlogPost
   }
   `;
-  
-  module.exports = typeDefs;
-  
-// removeUser(userID: ID!): User
 
+module.exports = typeDefs;
+
+// removeUser(userID: ID!): User
 
 // type getReactions {
 //     _id: ID
