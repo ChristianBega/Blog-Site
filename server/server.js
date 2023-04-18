@@ -49,6 +49,7 @@ startStandaloneServer(server, {
   context: ({ req }) => {
     async () => ({
       db: await client.connect(db),
+      auth: authMiddleware,
     });
     // const { cache } = server;
     return {

@@ -1,6 +1,6 @@
 const { AuthenticationError } = require("@apollo/server");
 const { User, Reactions, BlogPosts } = require("../models");
-// const { signToken } = require("../utils/auth");
+const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     // Finds all users
@@ -26,8 +26,15 @@ const resolvers = {
   },
 
   Mutation: {
+    // addUser: async (parent, { username, email, password }) => {
+    //   return User.create({ username, email, password });
+    // },
     addUser: async (parent, { username, email, password }) => {
-      return User.create({ username, email, password });
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      // Expected - {username, email, password} and jwt token
+      // console.log(user, token);
+      return { user, token };
     },
 
     // removeUser: async (parent, { userId }) => {
