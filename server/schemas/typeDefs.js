@@ -10,6 +10,11 @@ const typeDefs = `
     email: String
   }
 
+  type Auth {
+    token: ID!
+    userProfile: User
+  }
+
   type BlogPost {
     _id: ID
     blogPost: String
@@ -32,7 +37,10 @@ const typeDefs = `
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): User
+    addUser(username: String!, email: String!, password: String!): Auth
+
+    login(email: String!, password: String!): Auth
+
     addComment(blogPostId: ID!, commentText: String!): BlogPost
     removeComment(blogPostId: ID!, commentId: ID!): BlogPost
   }
