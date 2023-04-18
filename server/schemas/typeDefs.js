@@ -32,7 +32,6 @@ const typeDefs = `
   }
 
   type Mutation {
-
     addUser(username: String!, email: String!, password: String!): User
     addComment(blogPostId: ID!, commentText: String!): BlogPost
     removeComment(blogPostId: ID!, commentId: ID!): BlogPost
