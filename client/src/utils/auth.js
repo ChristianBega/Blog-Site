@@ -1,5 +1,5 @@
 import decode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 class AuthService {
   getProfile() {
     return decode(this.getToken());
@@ -27,7 +27,7 @@ class AuthService {
     // let history = useHistory();
     localStorage.setItem("id_token", idToken);
     // window.location.assign("/dashboard");
-    history("/dashboard");
+    history("/home");
   }
 
   logout() {

@@ -43,7 +43,7 @@ export default function SignUp() {
           </p>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleFormSubmit}>
             {/* Username input */}
             <div className="form-control">
               <label className="label">
@@ -85,9 +85,7 @@ export default function SignUp() {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button onSubmit={handleFormSubmit} className="btn btn-primary">
-                Sign up
-              </button>
+              <button className="btn btn-primary">Sign up</button>
             </div>
           </form>
         </div>
