@@ -1,10 +1,10 @@
-const { startStandaloneServer } = require("@apollo/server/standalone");
 // require dotenv
 require("dotenv").config();
 // require express
 const express = require("express");
 // require apollo server
 const { ApolloServer } = require("@apollo/server");
+const { startStandaloneServer } = require("@apollo/server/standalone");
 
 // require path
 const path = require("path");
@@ -49,8 +49,8 @@ startStandaloneServer(server, {
   context: ({ req }) => {
     async () => ({
       db: await client.connect(db),
+      auth: authMiddleware,
     });
-    // const { cache } = server;
     return {
       token: req.headers?.token,
     };

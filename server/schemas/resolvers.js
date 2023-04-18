@@ -1,6 +1,7 @@
-const { AuthenticationError } = require("@apollo/server");
+const { GraphQLError } = require("graphql");
+
 const { User, Reactions, BlogPosts } = require("../models");
-// const { signToken } = require("../utils/auth");
+const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     // Finds all users
@@ -27,12 +28,38 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
-      return User.create({ username, email, password });
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      // Expected - {username, email, password} and jwt token
+      // console.log(user, token);
+      return { user, token };
     },
-
     // removeUser: async (parent, { userId }) => {
     //   return User.findOneAndDelete({ _id: userId });
     // },
+
+    login: async (parent, { email, password }) => {
+      const userProfile = await User.findOne({ email });
+
+      if (!userProfile) {
+        // throw new AuthenticationError("No user profile with this email found!");
+        throw new GraphQLError("No user with this email found!!", {
+          extensions: { code: "UNAUTHENTICATED" },
+        });
+      }
+
+      const correctPw = await userProfile.isCorrectPassword(password);
+
+      if (!correctPw) {
+        // throw new AuthenticationError("Incorrect password!");
+        throw new GraphQLError("Invalid credentials!! Check email or password", {
+          extensions: { code: "UNAUTHENTICATED" },
+        });
+      }
+
+      const token = signToken(userProfile);
+      return { token, userProfile };
+    },
 
     addComment: async (parent, { blogPostId, commentText }) => {
       return BlogPosts.findOneAndUpdate(
