@@ -12,13 +12,13 @@ const resolvers = {
     User: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
     },
-    // Finds the client side user
-    // me: async (parent, args, context) => {
-    //   if (context.user) {
-    //     return Profile.findOne({ _id: context.user._id });
-    //   }
-    //   // throw new AuthenticationError("You need to be logged in!");
-    // },
+    // Finds the client side user and their context (data)
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return Profile.findOne({ _id: context.user._id });
+      }
+      throw new GraphQLError("You need to be logged in!");
+    },
 
     // Finds all blog posts
     BlogPost: async () => {
@@ -34,8 +34,11 @@ const resolvers = {
       // console.log(user, token);
       return { user, token };
     },
+
+    // removeUser returns null in apollo sandbox and wont update database...
+    
     // removeUser: async (parent, { userId }) => {
-    //   return User.findOneAndDelete({ _id: userId });
+    //   return User.findOneAndDelete({ _id: userId }, { $pull: { user: { _id: userId } } }, { new: true });
     // },
 
     login: async (parent, { email, password }) => {
