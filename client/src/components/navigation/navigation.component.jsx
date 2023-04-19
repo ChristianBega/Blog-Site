@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo.jpeg";
 // Icons
 import { FiUser, FiLogIn, FiLogOut, FiUserPlus, FiHome } from "react-icons/fi";
-// FiLogIn;
-// FiLogOut;
+
 export default function Navigation() {
   let history = useNavigate();
   const logout = (event) => {
@@ -22,12 +21,8 @@ export default function Navigation() {
     }
   };
 
-  // const handleOnBlur = (event) => {
-
-  // }
-
   return (
-    <nav className="sticky top-0 w-full, h-20 flex justify-between items-center px-8 text-white bg-zinc-900/50 backdrop-blur-sm z-50">
+    <nav className="sticky top-0 w-full h-20 flex justify-between items-center px-4 md:px-8 text-white bg-zinc-900/50 backdrop-blur-sm z-50">
       {/* <button>LOGO</button> */}
       <Link to={Auth.loggedIn() ? "/home" : "/"}>
         <img className="max-h-12 rounded-full" src={Logo} alt="Brain lightbulb logo" />
@@ -35,6 +30,8 @@ export default function Navigation() {
       <h1 className="text-3xl text-[#edeaea]">Coding Circle</h1>
       <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn m-1">
+          {/* If logged in then display the users images */}
+          {/* If not logged in then display default FiUser */}
           <FiUser size={16} />
         </label>
         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-content rounded-box w-52 | mt-5">
