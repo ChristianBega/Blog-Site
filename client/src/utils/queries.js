@@ -29,13 +29,16 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_BLOG_POSTS = gql`
-  query Query {
+  query BlogPost {
     BlogPost {
+      _id
       blogPost
-      comments {
-        commentText
-        createdAt
-      }
+      createdAt
+      creator
     }
   }
 `;
+// blogPostTitle not blogPost
+// comments {
+//         commentText
+//       }
