@@ -15,8 +15,15 @@ const typeDefs = `
     userProfile: User
   }
 
+  type BlogPosts {
+    _id: ID
+    creator: String
+    createdAt: String
+  }
+
   type BlogPost {
     _id: ID
+    blogTitle : String
     blogPost: String
     creator: String
     createdAt: String
@@ -33,7 +40,8 @@ const typeDefs = `
     Users: [User]!
     User(userId: ID!): User
     me: User
-    BlogPost: [BlogPost]
+    BlogPosts: [BlogPosts]
+    BlogPost(blogId: ID!): BlogPost
   }
 
   type Mutation {

@@ -21,8 +21,11 @@ const resolvers = {
     },
 
     // Finds all blog posts
-    BlogPost: async () => {
+    BlogPosts: async () => {
       return BlogPosts.find();
+    },
+    BlogPost: async (parent, { blogId }) => {
+      return BlogPosts.findOne({ _id: blogId,  });
     },
   },
 
@@ -36,7 +39,7 @@ const resolvers = {
     },
 
     // removeUser returns null in apollo sandbox and wont update database...
-    
+
     // removeUser: async (parent, { userId }) => {
     //   return User.findOneAndDelete({ _id: userId }, { $pull: { user: { _id: userId } } }, { new: true });
     // },
