@@ -3,7 +3,7 @@ import Auth from "../../utils/auth";
 
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [formState, setFormState] = useState({ username: "", email: "", password: "" });
@@ -79,9 +79,9 @@ export default function SignUp() {
                 className="input input-bordered"
               />
               <label className="label">
-                <a href="/login" className="label-text-alt link link-hover">
+                <Link to="/login" className="label-text-alt link link-hover">
                   Already have an account?
-                </a>
+                </Link>
               </label>
             </div>
             <div className="form-control mt-6">
