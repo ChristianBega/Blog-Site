@@ -29,10 +29,26 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_BLOG_POSTS = gql`
-  query BlogPost {
-    BlogPost {
+  query BlogPosts {
+    BlogPosts {
+      _id
+      blogTitle
+      createdAt
+      creator
+    }
+  }
+`;
+
+export const QUERY_SINGLE_BLOG_POST = gql`
+  query BlogPost($blogId: ID!) {
+    BlogPost(blogId: $blogId) {
       _id
       blogPost
+      blogTitle
+      comments {
+        commentText
+        createdAt
+      }
       createdAt
       creator
     }

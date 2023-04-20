@@ -17,6 +17,7 @@ const typeDefs = `
 
   type BlogPosts {
     _id: ID
+    blogTitle : String
     creator: String
     createdAt: String
   }

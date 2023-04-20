@@ -1,14 +1,17 @@
 [
   {
     "blogPost": "This is a blog post text example...",
+    "blogTitle": "This is a blog title",
     "creator": "Chris_TEST"
   },
   {
     "blogPost": "This is a blog post text example...",
+    "blogTitle": "This is a blog title",
     "creator": "Marisa_TEST"
   },
   {
     "blogPost": "This is a blog post text example...",
+    "blogTitle": "This is a blog title",
     "creator": "JohnDoe_TEST"
   }
 ]
