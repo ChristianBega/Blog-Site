@@ -5,6 +5,10 @@ const blogPostSchema = new Schema({
     type: String,
     trim: true,
   },
+  blogTitle: {
+    type: String,
+    trim: true,
+  },
   creator: {
     type: String,
     required: true,
