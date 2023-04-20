@@ -29,12 +29,28 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_BLOG_POSTS = gql`
-  query BlogPost {
-    BlogPost {
+  query BlogPosts {
+    BlogPosts {
       _id
-      blogPost
+      blogTitle
       createdAt
       creator
+    }
+  }
+`;
+
+export const QUERY_SINGLE_BLOG_POST = gql`
+  query BlogPost($blogId: ID!) {
+    BlogPost(blogId: $blogId) {
+      _id
+      blogPost
+      blogTitle
+      createdAt
+      creator
+      comments {
+        commentText
+        createdAt
+      }
     }
   }
 `;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FiSave } from "react-icons/fi";
 
 import StaticImg from "../../assets/staticProfileImg.jpg";
 export default function BlogPost({ blogData }) {
@@ -20,12 +21,16 @@ export default function BlogPost({ blogData }) {
           </div>
           <Link to="/blogPage">
             {/* Card Description/Title */}
-            <p className="card-title | my-3">{blogData.blogPost}</p>
+            <p className="card-title | my-3">{blogData.blogTitle}</p>
           </Link>
 
           <div className="card-actions justify-between items-center">
-            <p>{blogData.createdAt}</p>
-            <button className="btn btn-primary">Save</button>
+            {/* Card timeStamp */}
+            <small>{blogData.createdAt}</small>
+            <button className="btn btn-primary | flex gap-2">
+              <FiSave />
+              save
+            </button>
           </div>
         </div>
       </div>
