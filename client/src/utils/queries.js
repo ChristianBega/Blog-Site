@@ -45,12 +45,12 @@ export const QUERY_SINGLE_BLOG_POST = gql`
       _id
       blogPost
       blogTitle
-      createdAt
-      creator
       comments {
         commentText
         createdAt
       }
+      createdAt
+      creator
     }
   }
 `;
