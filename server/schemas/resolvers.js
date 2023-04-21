@@ -13,8 +13,8 @@ const resolvers = {
       return User.findOne({ _id: userId });
     },
     // Finds the client side user and their context (data)
-    me: async (parent, args, context) => {
-      if (context.user) {
+    me: async (parent, args, contextValue) => {
+      if (contextValue.user) {
         return Profile.findOne({ _id: context.user._id });
       }
       throw new GraphQLError("You need to be logged in!");
@@ -24,8 +24,9 @@ const resolvers = {
     BlogPosts: async () => {
       return BlogPosts.find();
     },
+    // Find a single blog post
     BlogPost: async (parent, { blogId }) => {
-      return BlogPosts.findOne({ _id: blogId,  });
+      return BlogPosts.findOne({ _id: blogId });
     },
   },
 
@@ -37,13 +38,13 @@ const resolvers = {
       // console.log(user, token);
       return { user, token };
     },
-
-    // removeUser returns null in apollo sandbox and wont update database...
-
+    //! removeUser returns null in apollo sandbox and wont update database...
     // removeUser: async (parent, { userId }) => {
     //   return User.findOneAndDelete({ _id: userId }, { $pull: { user: { _id: userId } } }, { new: true });
     // },
+    //! create a Update User resolver
 
+    // Login Resolver
     login: async (parent, { email, password }) => {
       const userProfile = await User.findOne({ email });
 
@@ -67,6 +68,7 @@ const resolvers = {
       return { token, userProfile };
     },
 
+    // Add comment
     addComment: async (parent, { blogPostId, commentText }) => {
       return BlogPosts.findOneAndUpdate(
         { _id: blogPostId },
@@ -79,9 +81,24 @@ const resolvers = {
         }
       );
     },
+    // Remove comment
     removeComment: async (parent, { blogPostId, commentId }) => {
       return BlogPosts.findOneAndUpdate({ _id: blogPostId }, { $pull: { comments: { _id: commentId } } }, { new: true });
     },
+
+    //! create update comment resolver
+
+    //! create an Add blog post resolver
+    // pass context.user._id
+    addBlogPost: async (parent, { blogPost, blogTitle, creator }) => {
+      return BlogPosts.create({ blogPost, blogTitle, creator });
+    },
+
+    //! create an Update blog post resolver
+    //! create a Remove blog post resolver
+
+    //! create add like(reaction) resolver
+    //! create remove like(reaction) resolver
   },
 };
 
