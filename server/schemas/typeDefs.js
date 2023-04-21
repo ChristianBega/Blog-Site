@@ -48,11 +48,12 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     
-    
     login(email: String!, password: String!): Auth
     
     addComment(blogPostId: ID!, commentText: String!): BlogPost
     removeComment(blogPostId: ID!, commentId: ID!): BlogPost
+
+    addBlogPost(blogPost: String!, blogTitle: String!, creator: ID!): BlogPost
   }
   `;
 
