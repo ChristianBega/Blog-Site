@@ -4,18 +4,16 @@ import Auth from "../../utils/auth";
 
 import { useMutation } from "@apollo/client";
 
-export default function AddBlogPost() {
+export default function AddBlogPost({ blogPostData, setBlogPostData }) {
   // use queryMe to find the logged in user for the creator
   // if no user then don't allow - optional chaining ?.
 
   const [currentUser, setCurrentUser] = useState();
   const [formState, setFormState] = useState({ blogPost: "", blogTitle: "", creator: "" });
-
   const [addBlogPost, { error: mutationError, data: mutationData }] = useMutation(ADD_BLOG_POST);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(formState);
+    // event.preventDefault();
     try {
       const { mutationData } = await addBlogPost({
         variables: { ...formState, creator: currentUser?.data.username },
@@ -37,7 +35,7 @@ export default function AddBlogPost() {
 
   useEffect(() => {
     setCurrentUser(Auth.getProfile());
-  }, []);
+  }, [handleSubmit]);
   return (
     <form onSubmit={handleSubmit} className="form-control | flex flex-col items-center gap-4 | min-w-full">
       <h1>Create a blog post!</h1>

@@ -18,6 +18,9 @@ export default function BlogPage() {
   useEffect(() => {
     setCurrentBlogID(location.state?.currentBlogId);
   }, [currentBlogID]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section className="min-h-screen flex flex-col items-center | mt-10" id={currentBlogID}>
