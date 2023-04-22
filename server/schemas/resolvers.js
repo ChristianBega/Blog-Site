@@ -14,8 +14,9 @@ const resolvers = {
     },
     // Finds the client side user and their context (data)
     me: async (parent, args, contextValue) => {
+      console.log(contextValue);
       if (contextValue.user) {
-        return Profile.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id });
       }
       throw new GraphQLError("You need to be logged in!");
     },
