@@ -34,3 +34,13 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const ADD_BLOG_POST = gql`
+  mutation Mutation($blogPost: String!, $blogTitle: String!, $creator: ID!) {
+    addBlogPost(blogPost: $blogPost, blogTitle: $blogTitle, creator: $creator) {
+      blogPost
+      blogTitle
+      creator
+    }
+  }
+`;

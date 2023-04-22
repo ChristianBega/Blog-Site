@@ -4,6 +4,7 @@ import BlogPost from "../components/BlogPost/blogPost.component";
 // GraphQL
 import { useQuery } from "@apollo/client";
 import { QUERY_BLOG_POSTS } from "../utils/queries";
+import AddBlogPost from "../components/BlogPost/addBlogPost.component";
 // import { useNavigate } from "react-router-dom";
 // let history = useNavigate();
 
@@ -13,6 +14,7 @@ export default function HomePage() {
   const blogPostData = data?.BlogPosts || [];
   return (
     <section id="home-page" className="container min-h-screen mx-auto my-10 | flex flex-wrap gap-4 justify-center items-center ">
+      <AddBlogPost />
       {blogPostData.map((blogData, index) => (
         <BlogPost blogData={blogData} key={index} />
       ))}
