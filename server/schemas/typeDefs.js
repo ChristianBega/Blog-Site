@@ -40,7 +40,7 @@ const typeDefs = `
   type Query {
     Users: [User]!
     User(userId: ID!): User
-    me: User
+    Me: User
     BlogPosts: [BlogPosts]
     BlogPost(blogId: ID!): BlogPost
   }
