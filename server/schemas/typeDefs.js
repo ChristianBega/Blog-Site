@@ -10,6 +10,8 @@ const typeDefs = `
     email: String
   }
 
+  
+
   type Auth {
     token: ID!
     userProfile: User
@@ -47,6 +49,8 @@ const typeDefs = `
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
+
+    addSocials(userId: ID!, socials: String!): User
     
     login(email: String!, password: String!): Auth
     

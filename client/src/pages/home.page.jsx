@@ -18,8 +18,7 @@ export default function HomePage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-  // const blogPostData = ;
+  });
   return (
     <section id="home-page" className="container min-h-screen mx-auto my-10 | flex flex-wrap gap-4 justify-center items-center ">
       <AddBlogPost blogPostData={blogPostData} setBlogPostData={setBlogPostData} />

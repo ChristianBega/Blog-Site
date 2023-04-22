@@ -19,10 +19,11 @@ const userSchema = new Schema({
     required: true,
     minlength: 12,
   },
-  // blogPosts: [
+  // socials: [
   //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "blogPosts",
+  //     social: {
+  //       type: String,
+  //     },
   //   },
   // ],
 });
