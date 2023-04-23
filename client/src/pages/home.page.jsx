@@ -3,7 +3,7 @@ import BlogPost from "../components/BlogPost/blogPost.component";
 // GraphQL
 import { useQuery } from "@apollo/client";
 import { QUERY_BLOG_POSTS } from "../utils/queries";
-import AddBlogPost from "../components/BlogPost/addBlogPost.component";
+import AddBlogPost from "../components/Forms/addBlogPost.component";
 // import { useNavigate } from "react-router-dom";
 // let history = useNavigate();
 

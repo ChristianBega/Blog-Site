@@ -35,7 +35,9 @@ export default function AddBlogPost() {
 
   return (
     <form onSubmit={handleSubmit} className="form-control | flex flex-col items-center gap-4 | min-w-full">
-      <h1>Create a blog post!</h1>
+      <h2 text-5xl font-bold>
+        Create a blog post!
+      </h2>
       <input
         onChange={handleChange}
         value={formState.name}

@@ -52,19 +52,19 @@ export default function BlogPage() {
 
         <ul className="flex gap-6 | justify-end items-center">
           <li>
-            <Link>
+            {/* <a href={singleUser?.socials.socialLink} target="_blank" rel="noopener noreferrer">
               <FiGithub />
-            </Link>
+            </a> */}
           </li>
           <li>
-            <Link>
+            <a href="http://" target="_blank" rel="noopener noreferrer">
               <FiInstagram />
-            </Link>
+            </a>
           </li>
           <li>
-            <Link>
+            <a href="http://" target="_blank" rel="noopener noreferrer">
               <FiTwitter />
-            </Link>
+            </a>
           </li>
         </ul>
       </div>
@@ -76,4 +76,9 @@ export default function BlogPage() {
       </div>
     </section>
   );
+}
+
+<a href="http://" target="_blank" rel="noopener noreferrer"></a>;
+{
+  /* <a href="" target="" ></a> */
 }

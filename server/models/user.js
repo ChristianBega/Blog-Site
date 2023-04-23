@@ -24,6 +24,9 @@ const userSchema = new Schema({
       socialLink: {
         type: String,
       },
+      socialPlatform: {
+        type: String,
+      },
     },
   ],
 });

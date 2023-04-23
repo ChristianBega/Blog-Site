@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 // Images
 import Logo from "../../assets/logo.jpeg";
 // Icons
-import { FiUser, FiLogIn, FiLogOut, FiUserPlus, FiHome } from "react-icons/fi";
+import { FiUser, FiLogIn, FiLogOut, FiUserPlus, FiHome, FiSettings } from "react-icons/fi";
 
 export default function Navigation() {
   let history = useNavigate();
@@ -41,6 +41,12 @@ export default function Navigation() {
                 <button onClick={handleClick}>
                   <FiHome />
                   <Link to="/home">Home</Link>
+                </button>
+              </li>
+              <li>
+                <button onClick={handleClick}>
+                  <FiSettings />
+                  <Link to="/settings">Settings</Link>
                 </button>
               </li>
               <li>

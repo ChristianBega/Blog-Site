@@ -46,11 +46,11 @@ const resolvers = {
     //! create a Update User resolver
 
     //! Add user socials
-    addSocial: async (parent, { userId, socialLink }) => {
+    addSocial: async (parent, { userId, socialLink, socialPlatform }) => {
       return User.findOneAndUpdate(
         { _id: userId },
         {
-          $addToSet: { socials: { socialLink } },
+          $addToSet: { socials: { socialLink, socialPlatform } },
         },
         {
           new: true,

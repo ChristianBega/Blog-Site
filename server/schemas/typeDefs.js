@@ -13,7 +13,8 @@ const typeDefs = `
 
   type Social {
     _id: ID
-    socialLink: String
+    socialLink: String!
+    socialPlatform: String!
   }
   
   type Auth {
@@ -55,7 +56,7 @@ const typeDefs = `
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
 
-    addSocial(userId: ID!, socialLink: String!): User
+    addSocial(userId: ID!, socialLink: String!, socialPlatform: String!): User
     
     login(email: String!, password: String!): Auth
     
