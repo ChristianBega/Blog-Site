@@ -10,16 +10,17 @@ export const QUERY_PROFILES = gql`
 `;
 
 export const QUERY_SINGLE_PROFILE = gql`
-  query Users($userId: ID!) {
+  query Query($userId: ID!) {
     User(userId: $userId) {
       _id
       email
       username
-      socials
+      socials {
+        socialLink
+      }
     }
   }
 `;
-
 export const QUERY_ME = gql`
   query Me {
     me {

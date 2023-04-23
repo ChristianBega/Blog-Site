@@ -3,6 +3,7 @@ import { ADD_BLOG_POST } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
 import { useMutation } from "@apollo/client";
+import BlogPost from "../BlogPost/blogPost.component";
 
 export default function AddBlogPost() {
   // use queryMe to find the logged in user for the creator
@@ -12,13 +13,15 @@ export default function AddBlogPost() {
   const [formState, setFormState] = useState({ blogPost: "", blogTitle: "", creator: "" });
   const [addBlogPost, { error: mutationError, data: mutationData }] = useMutation(ADD_BLOG_POST);
 
+  console.log(currentUser);
+
   const handleSubmit = async (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     try {
       const { mutationData } = await addBlogPost({
         variables: { ...formState, creator: currentUser?.data.username },
       });
-      return mutationData;
+      // return <BlogPost userId={currentUser.data._id}></BlogPost>;
     } catch (e) {
       console.error(e);
     }
@@ -35,9 +38,7 @@ export default function AddBlogPost() {
 
   return (
     <form onSubmit={handleSubmit} className="form-control | flex flex-col items-center gap-4 | min-w-full">
-      <h2 text-5xl font-bold>
-        Create a blog post!
-      </h2>
+      <h2 className="text-5xl font-bold">Create a blog post!</h2>
       <input
         onChange={handleChange}
         value={formState.name}

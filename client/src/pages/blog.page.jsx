@@ -19,13 +19,16 @@ export default function BlogPage() {
   const [currentUser, setCurrentUser] = useState(Auth.getProfile());
   // QUERY SINGLE BLOG POST by ID
   const { loading: blogLoading, error: blogError, data: blogData } = useQuery(QUERY_SINGLE_BLOG_POST, { variables: { blogId: currentBlogID } });
-  // QUERY SINGLE PROFILE by ID
-  const { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_SINGLE_PROFILE, { variables: { userId: currentUser.data._id } });
 
+  console.log(blogData);
+  // QUERY SINGLE PROFILE by ID
+  // Need to query to user of the blog post, get their id, and then use it as the userID to query for the single profile.
+  const { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_SINGLE_PROFILE, { variables: { userId: currentUser?.data._id } });
+
+  // console.log(currentUser.data._id);
   const singleBlogPost = blogData?.BlogPost || [];
   const singleUser = userData?.User || [];
-  console.log(singleUser);
-  console.log(userError);
+  // console.log(singleUser.socials);
 
   useEffect(() => {
     setCurrentBlogID(location.state?.currentBlogId);
@@ -34,6 +37,24 @@ export default function BlogPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // const filterSocials = (socialLink) => {
+  //   socialLink = singleUser.socials;
+  //   return socialLink.map((userSocial, index) => (
+  //     <li key={index}>
+  //       <a href={`http://${userSocial.socialLink}`} target="_blank" rel="noopener noreferrer">
+  //         <FiGithub />
+  //       </a>
+  //     </li>
+  //   ));
+  // };
+  // call filter method
+  // if socialPlatform === twitterf
+  // if socialPlatform === instagram
+  // if socialPlatform === github
+
+  // then return and render out respected icon with users socialLink as href
+  // if !singleProfile.socials return default https://SocialPlatform.com
 
   return (
     <section className="min-h-screen flex flex-col items-center | mt-10" id={currentBlogID}>
@@ -51,10 +72,11 @@ export default function BlogPage() {
         </div>
 
         <ul className="flex gap-6 | justify-end items-center">
-          <li>
-            {/* <a href={singleUser?.socials.socialLink} target="_blank" rel="noopener noreferrer">
+          {/* {filterSocials()}  */}
+          {/* <li>
+            <a target="_blank" rel="noopener noreferrer">
               <FiGithub />
-            </a> */}
+            </a>
           </li>
           <li>
             <a href="http://" target="_blank" rel="noopener noreferrer">
@@ -65,7 +87,7 @@ export default function BlogPage() {
             <a href="http://" target="_blank" rel="noopener noreferrer">
               <FiTwitter />
             </a>
-          </li>
+          </li> */}
         </ul>
       </div>
       <div className="mt-5">
@@ -76,9 +98,4 @@ export default function BlogPage() {
       </div>
     </section>
   );
-}
-
-<a href="http://" target="_blank" rel="noopener noreferrer"></a>;
-{
-  /* <a href="" target="" ></a> */
 }
