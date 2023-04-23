@@ -23,6 +23,18 @@ export const ADD_USER = gql`
   }
 `;
 
+export const ADD_USER_SOCIALS = gql`
+  mutation Mutation($userId: ID!, $socialLink: String!, $socialPlatform: String!) {
+    addSocial(userId: $userId, socialLink: $socialLink, socialPlatform: $socialPlatform) {
+      _id
+      socials {
+        socialLink
+        socialPlatform
+      }
+    }
+  }
+`;
+
 export const LOGIN_USER = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {

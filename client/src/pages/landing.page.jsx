@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HeroBgImg from "../assets/heroImage.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function LandingPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     // <section id="landing-page" className="container min-h-screen mx-auto | flex justify-center items-center ">
     // </section>

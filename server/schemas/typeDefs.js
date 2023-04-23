@@ -8,12 +8,20 @@ const typeDefs = `
     username: String
     password: String
     email: String
+    socials : [Social]
   }
 
+  type Social {
+    _id: ID
+    socialLink: String!
+    socialPlatform: String!
+  }
+  
   type Auth {
     token: ID!
     userProfile: User
   }
+  
 
   type BlogPosts {
     _id: ID
@@ -40,13 +48,15 @@ const typeDefs = `
   type Query {
     Users: [User]!
     User(userId: ID!): User
-    me: User
+    Me: User
     BlogPosts: [BlogPosts]
     BlogPost(blogId: ID!): BlogPost
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
+
+    addSocial(userId: ID!, socialLink: String!, socialPlatform: String!): User
     
     login(email: String!, password: String!): Auth
     

@@ -46,14 +46,20 @@ app.get("/", (req, res) => {
 });
 
 startStandaloneServer(server, {
-  context: ({ req }) => {
+  // context: ({ req }) => {
+  //   async () => ({
+  //     auth: authMiddleware,
+  //   });
+  //   return {
+  //     token: req.headers?.token,
+  //   };
+  // },
+  context: ({ req, res }) => {
     async () => ({
-      db: await client.connect(db),
-      auth: authMiddleware,
+      // db: await client.connect(db),
+      token: await getTokenForRequest(req),
     });
-    return {
-      token: req.headers?.token,
-    };
+    // authScope: getScope(req.headers.authorization),
   },
   listen: { port: PORT },
 }).then(({ url }) => {

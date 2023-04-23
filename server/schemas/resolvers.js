@@ -13,9 +13,9 @@ const resolvers = {
       return User.findOne({ _id: userId });
     },
     // Finds the client side user and their context (data)
-    me: async (parent, args, contextValue) => {
-      console.log(contextValue);
-      if (contextValue.user) {
+    Me: async (parent, args, contextValue) => {
+      console.log(contextValue.token);
+      if (contextValue) {
         return User.findOne({ _id: context.user._id });
       }
       throw new GraphQLError("You need to be logged in!");
@@ -44,6 +44,20 @@ const resolvers = {
     //   return User.findOneAndDelete({ _id: userId }, { $pull: { user: { _id: userId } } }, { new: true });
     // },
     //! create a Update User resolver
+
+    //! Add user socials
+    addSocial: async (parent, { userId, socialLink, socialPlatform }) => {
+      return User.findOneAndUpdate(
+        { _id: userId },
+        {
+          $addToSet: { socials: { socialLink, socialPlatform } },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
 
     // Login Resolver
     login: async (parent, { email, password }) => {

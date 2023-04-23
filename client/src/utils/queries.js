@@ -15,6 +15,7 @@ export const QUERY_SINGLE_PROFILE = gql`
       _id
       email
       username
+      socials
     }
   }
 `;
