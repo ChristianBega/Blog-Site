@@ -46,18 +46,18 @@ const resolvers = {
     //! create a Update User resolver
 
     //! Add user socials
-    // addSocials: async (parent, { userId, social }) => {
-    //   return User.findOneAndUpdate(
-    //     { _id: userId },
-    //     {
-    //       $addToSet: { socials: { social } },
-    //     },
-    //     {
-    //       new: true,
-    //       runValidators: true,
-    //     }
-    //   );
-    // },
+    addSocial: async (parent, { userId, socialLink }) => {
+      return User.findOneAndUpdate(
+        { _id: userId },
+        {
+          $addToSet: { socials: { socialLink } },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
 
     // Login Resolver
     login: async (parent, { email, password }) => {

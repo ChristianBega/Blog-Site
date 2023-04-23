@@ -19,13 +19,13 @@ const userSchema = new Schema({
     required: true,
     minlength: 12,
   },
-  // socials: [
-  //   {
-  //     social: {
-  //       type: String,
-  //     },
-  //   },
-  // ],
+  socials: [
+    {
+      socialLink: {
+        type: String,
+      },
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {
