@@ -1,15 +1,6 @@
 import { gql } from "@apollo/client";
 
-// export const ADD_USER = gql`
-//   mutation addUser($username: String!, $email: String!, $password: String!) {
-//     addUser(username: $username, email: $email, password: $password) {
-//       email
-//       password
-//       username
-//     }
-//   }
-// `;
-
+// Mutation to add user - username & email & password required!
 export const ADD_USER = gql`
   mutation AddUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
@@ -23,6 +14,7 @@ export const ADD_USER = gql`
   }
 `;
 
+// Mutation to add socials to a users profile - userId, socialLink, and socialPlatform required!
 export const ADD_USER_SOCIALS = gql`
   mutation Mutation($userId: ID!, $socialLink: String!, $socialPlatform: String!) {
     addSocial(userId: $userId, socialLink: $socialLink, socialPlatform: $socialPlatform) {
@@ -35,6 +27,7 @@ export const ADD_USER_SOCIALS = gql`
   }
 `;
 
+// Mutation to login user - email & password required!
 export const LOGIN_USER = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -47,6 +40,7 @@ export const LOGIN_USER = gql`
   }
 `;
 
+// Mutation to add blog post - blogPost, blogTitle, and creator required!
 export const ADD_BLOG_POST = gql`
   mutation Mutation($blogPost: String!, $blogTitle: String!, $creator: ID!) {
     addBlogPost(blogPost: $blogPost, blogTitle: $blogTitle, creator: $creator) {

@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ADD_BLOG_POST } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
 import { useMutation } from "@apollo/client";
-import BlogPost from "../BlogPost/blogPost.component";
 
 export default function AddBlogPost() {
-  // use queryMe to find the logged in user for the creator
-  // if no user then don't allow - optional chaining ?.
-
   const [currentUser, setCurrentUser] = useState(Auth.getProfile());
+  // current logged in users id - can pass this to 
+  // console.log(currentUser.data._id);
   const [formState, setFormState] = useState({ blogPost: "", blogTitle: "", creator: "" });
   const [addBlogPost, { error: mutationError, data: mutationData }] = useMutation(ADD_BLOG_POST);
-
-  console.log(currentUser);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,7 +17,6 @@ export default function AddBlogPost() {
       const { mutationData } = await addBlogPost({
         variables: { ...formState, creator: currentUser?.data.username },
       });
-      // return <BlogPost userId={currentUser.data._id}></BlogPost>;
     } catch (e) {
       console.error(e);
     }

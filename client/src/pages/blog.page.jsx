@@ -1,34 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 // GraphQL
 import { useQuery } from "@apollo/client";
-import { QUERY_SINGLE_BLOG_POST, QUERY_SINGLE_PROFILE } from "../utils/queries";
+import { QUERY_SINGLE_BLOG_POST } from "../utils/queries";
 import { FiInstagram, FiGithub, FiTwitter } from "react-icons/fi";
 // Auth
-import Auth from "../utils/auth";
 
 // Images
 import StaticImg from "../assets/staticProfileImg.jpg";
 
 export default function BlogPage() {
+  // using useLocation to access props passed from Link
   const location = useLocation();
-  // current blog id
   const [currentBlogID, setCurrentBlogID] = useState("");
-  // current user = {email, username, _id}
-  const [currentUser, setCurrentUser] = useState(Auth.getProfile());
   // QUERY SINGLE BLOG POST by ID
   const { loading: blogLoading, error: blogError, data: blogData } = useQuery(QUERY_SINGLE_BLOG_POST, { variables: { blogId: currentBlogID } });
 
-  console.log(blogData);
-  // QUERY SINGLE PROFILE by ID
-  // Need to query to user of the blog post, get their id, and then use it as the userID to query for the single profile.
-  const { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_SINGLE_PROFILE, { variables: { userId: currentUser?.data._id } });
-
-  // console.log(currentUser.data._id);
   const singleBlogPost = blogData?.BlogPost || [];
-  const singleUser = userData?.User || [];
-  // console.log(singleUser.socials);
 
   useEffect(() => {
     setCurrentBlogID(location.state?.currentBlogId);
@@ -73,7 +62,7 @@ export default function BlogPage() {
 
         <ul className="flex gap-6 | justify-end items-center">
           {/* {filterSocials()}  */}
-          {/* <li>
+          <li>
             <a target="_blank" rel="noopener noreferrer">
               <FiGithub />
             </a>
@@ -87,7 +76,7 @@ export default function BlogPage() {
             <a href="http://" target="_blank" rel="noopener noreferrer">
               <FiTwitter />
             </a>
-          </li> */}
+          </li>
         </ul>
       </div>
       <div className="mt-5">
