@@ -19,6 +19,7 @@ export const QUERY_SINGLE_PROFILE = gql`
       username
       socials {
         socialLink
+        socialPlatform
       }
     }
   }
