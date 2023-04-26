@@ -17,7 +17,7 @@ export default function HomePage() {
     window.scrollTo(0, 0);
   });
   return (
-    <section id="home-page" className="container min-h-screen mx-auto my-10 | flex flex-wrap gap-4 justify-center items-center ">
+    <section id="home-page" className="container min-h-screen mx-auto my-10 p-4 | flex flex-wrap gap-4 justify-center items-center ">
       {/* {error?.(<p>{error.message}</p>)} */}
       <AddBlogPost blogPostData={blogPostData} />
       {loading ? "loading" : blogPostData.map((blogData, index) => <BlogPost blogData={blogData} key={index} />)}

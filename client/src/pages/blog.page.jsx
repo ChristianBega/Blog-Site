@@ -19,7 +19,7 @@ export default function BlogPage() {
   const { loading: blogLoading, error: blogError, data: blogData } = useQuery(QUERY_SINGLE_BLOG_POST, { variables: { blogId: currentBlogID } });
   // Response from QUERY SINGLE BLOG POST
   const singleBlogPost = blogData?.BlogPost || [];
-
+  // console.log(singleBlogPost);
   // QUERY SINGLE USER by ID (creatorID)
   const {
     loading: userLoading,
@@ -27,9 +27,8 @@ export default function BlogPage() {
     data: userData,
   } = useQuery(QUERY_SINGLE_PROFILE, { variables: { userId: singleBlogPost?.creatorId } });
 
-  //
+  // Response from QUERY SINGLE Post
   const singleUser = userData?.User || [];
-  console.log(singleUser);
 
   useEffect(() => {
     setCurrentBlogID(location.state?.currentBlogId);
@@ -46,7 +45,7 @@ export default function BlogPage() {
       socialPlatform = social.socialPlatform;
       if (socialPlatform === "Twitter") {
         return (
-          <li>
+          <li className="mt-2">
             <a href={`${socialUrl}`} target="_blank" rel="noopener noreferrer">
               <FiTwitter />
             </a>
@@ -54,7 +53,7 @@ export default function BlogPage() {
         );
       } else if (socialPlatform === "Github") {
         return (
-          <li>
+          <li className="mt-2">
             <a href={`${socialUrl}`} target="_blank" rel="noopener noreferrer">
               <FiGithub />
             </a>
@@ -62,7 +61,7 @@ export default function BlogPage() {
         );
       } else {
         return (
-          <li>
+          <li className="mt-2">
             <a href={`${socialUrl}`} target="_blank" rel="noopener noreferrer">
               <FiInstagram />
             </a>
@@ -72,36 +71,32 @@ export default function BlogPage() {
     });
   };
 
-  // call filter method
-  // if socialPlatform === twitter
-  // if socialPlatform === instagram
-  // if socialPlatform === github
-
-  // then return and render out respected icon with users socialLink as href
-  // if !singleProfile.socials return default https://SocialPlatform.com
-
   return (
-    <section className="min-h-screen flex flex-col items-center | mt-10" creatorid={singleBlogPost.creatorId} blogid={currentBlogID}>
-      <div className="flex gap-4 w-6/12 | justify-between">
-        <div className="flex gap-4">
-          <div className="avatar">
-            <div className="w-12 rounded-full">
-              <img src={StaticImg} />
+    <section className=" min-h-screen flex flex-col items-center | mt-10 p-4" creatorid={singleBlogPost.creatorId} blogid={currentBlogID}>
+      <div className="card bg-base-200 shadow-xl p-4 | flex  justify-between w-auto">
+        <div className="flex gap-6">
+          <div className="card-title flex gap-4">
+            <div className="avatar">
+              <div className="w-12 rounded-full">
+                <img src={StaticImg} />
+              </div>
+            </div>
+            <div>
+              <h2 className="">{singleBlogPost.creator}</h2>
+              <small>{singleBlogPost.createdAt}</small>
             </div>
           </div>
-          <div>
-            <h2 className="">{singleBlogPost.creator}</h2>
-            <small>{singleBlogPost.createdAt}</small>
-          </div>
+          <ul className="flex gap-4">{filterSocials()}</ul>
         </div>
+      </div>
 
-        <ul className="flex gap-6 | justify-end items-center">{filterSocials()}</ul>
-      </div>
-      <div className="mt-5">
-        <h1 className="text-3xl">{singleBlogPost.blogTitle}</h1>
-      </div>
-      <div className="mt-5">
-        <p>{singleBlogPost.blogPost}</p>
+      <div className="card bg-base-200 shadow-xl p-4 |flex  justify-center max-w-lg | mt-5">
+        <div className="mt-5 ">
+          <h1 className="text-3xl text-center">{singleBlogPost.blogTitle}</h1>
+        </div>
+        <div className="mt-5">
+          <p>{singleBlogPost.blogPost}</p>
+        </div>
       </div>
     </section>
   );

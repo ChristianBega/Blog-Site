@@ -24,24 +24,14 @@ export default function AddSocials() {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
     try {
       const { data } = await addSocial({
         variables: { ...formState, userId: currentUser?.data._id },
       });
-      console.log(data);
     } catch (e) {
       console.error(e);
     }
-
-    // // clear form values
-    // setFormState({
-    //   email: "",
-    //   password: "",
-    // });
   };
-
-  console.log(error);
 
   return (
     <form onSubmit={handleFormSubmit} className="form-control | flex flex-col items-center gap-4 | min-w-full">
