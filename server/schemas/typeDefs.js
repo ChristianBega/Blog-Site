@@ -36,6 +36,7 @@ const typeDefs = `
     blogPost: String
     creator: String
     createdAt: String
+    creatorId: String
     comments: [Comment]!
   }
 
@@ -63,7 +64,7 @@ const typeDefs = `
     addComment(blogPostId: ID!, commentText: String!): BlogPost
     removeComment(blogPostId: ID!, commentId: ID!): BlogPost
 
-    addBlogPost(blogPost: String!, blogTitle: String!, creator: ID!): BlogPost
+    addBlogPost(blogPost: String!, blogTitle: String!, creator: String!, creatorId: String!): BlogPost
   }
   `;
 

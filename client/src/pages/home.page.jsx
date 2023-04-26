@@ -18,7 +18,7 @@ export default function HomePage() {
   });
   return (
     <section id="home-page" className="container min-h-screen mx-auto my-10 | flex flex-wrap gap-4 justify-center items-center ">
-      {error?.(<p>{error.message}</p>)}
+      {/* {error?.(<p>{error.message}</p>)} */}
       <AddBlogPost blogPostData={blogPostData} />
       {loading ? "loading" : blogPostData.map((blogData, index) => <BlogPost blogData={blogData} key={index} />)}
     </section>

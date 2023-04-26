@@ -14,6 +14,10 @@ const blogPostSchema = new Schema({
     required: true,
     trim: true,
   },
+  creatorId: {
+    type: String,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -21,11 +25,6 @@ const blogPostSchema = new Schema({
   },
   comments: [
     {
-      // creator: {
-      //   type: String,
-      //   required: true,
-      //   trim: true,
-      // },
       commentText: {
         type: String,
         required: "You need to leave a comment!",

@@ -42,11 +42,12 @@ export const LOGIN_USER = gql`
 
 // Mutation to add blog post - blogPost, blogTitle, and creator required!
 export const ADD_BLOG_POST = gql`
-  mutation Mutation($blogPost: String!, $blogTitle: String!, $creator: ID!) {
-    addBlogPost(blogPost: $blogPost, blogTitle: $blogTitle, creator: $creator) {
+  mutation Mutation($blogPost: String!, $blogTitle: String!, $creator: String!, $creatorId: String!) {
+    addBlogPost(blogPost: $blogPost, blogTitle: $blogTitle, creator: $creator, creatorId: $creatorId) {
       blogPost
       blogTitle
       creator
+      creatorId
     }
   }
 `;

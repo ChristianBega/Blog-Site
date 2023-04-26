@@ -4,10 +4,10 @@ import Auth from "../../utils/auth";
 
 import { useMutation } from "@apollo/client";
 
+// current logged in users id - can pass this to
+// console.log(currentUser.data._id);
 export default function AddBlogPost() {
   const [currentUser, setCurrentUser] = useState(Auth.getProfile());
-  // current logged in users id - can pass this to 
-  // console.log(currentUser.data._id);
   const [formState, setFormState] = useState({ blogPost: "", blogTitle: "", creator: "" });
   const [addBlogPost, { error: mutationError, data: mutationData }] = useMutation(ADD_BLOG_POST);
 
@@ -15,7 +15,7 @@ export default function AddBlogPost() {
     event.preventDefault();
     try {
       const { mutationData } = await addBlogPost({
-        variables: { ...formState, creator: currentUser?.data.username },
+        variables: { ...formState, creator: currentUser?.data.username, creatorId: currentUser?.data._id },
       });
     } catch (e) {
       console.error(e);

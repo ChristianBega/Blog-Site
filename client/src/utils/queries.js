@@ -27,10 +27,14 @@ export const QUERY_SINGLE_PROFILE = gql`
 //! Todo - verify queryMe for finding current user is working
 // Query for finding current user
 // export const QUERY_ME = gql`
-//   query Me {
-//     me {
+//   query Query {
+//     Me {
 //       _id
-//       username
+//       email
+//       socials {
+//         socialLink
+//         socialPlatform
+//       }
 //     }
 //   }
 // `;
@@ -60,6 +64,7 @@ export const QUERY_SINGLE_BLOG_POST = gql`
       }
       createdAt
       creator
+      creatorId
     }
   }
 `;
