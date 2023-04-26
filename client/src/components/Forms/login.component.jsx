@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+  let history = useNavigate();
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error, data }] = useMutation(LOGIN_USER);
-  let history = useNavigate();
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -39,12 +39,13 @@ export default function Login() {
       password: "",
     });
   };
+
   return (
     <section id="login-hero" className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
+        <div className="text-center lg:text-left | w-6/12 ">
           <h1 className="text-5xl font-bold">Login!</h1>
-          <p className="py-6">
+          <p className="py-6 ">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
             id nisi.
           </p>
@@ -70,10 +71,11 @@ export default function Login() {
                 className="input input-bordered"
               />
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
+                <Link to="/signup" className="label-text-alt link link-hover">
+                  Don't have an account?
+                </Link>
               </label>
+              {error ? <p className="mt-2 text-red-500">{error.message}</p> : null}
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>

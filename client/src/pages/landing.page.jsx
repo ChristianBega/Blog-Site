@@ -7,9 +7,6 @@ export default function LandingPage() {
     window.scrollTo(0, 0);
   }, []);
   return (
-    // <section id="landing-page" className="container min-h-screen mx-auto | flex justify-center items-center ">
-    // </section>
-    /* <h1 className="text-3xl font-bold underline">landingPage</h1> */
     <div className="hero min-h-screen" style={{ backgroundImage: `url(${HeroBgImg})` }}>
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-neutral-content">

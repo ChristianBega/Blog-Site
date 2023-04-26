@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // Icons
-import { FiSave } from "react-icons/fi";
+// import { FiSave } from "react-icons/fi";
 
 import StaticImg from "../../assets/staticProfileImg.jpg";
 export default function BlogPost({ blogData }) {
@@ -27,10 +27,10 @@ export default function BlogPost({ blogData }) {
           <div className="card-actions justify-between items-center">
             {/* Card timeStamp */}
             <small>{blogData.createdAt}</small>
-            <button className="btn btn-primary | flex gap-2">
-              <FiSave />
-              save
-            </button>
+            {/* <button className="btn btn-primary | flex gap-2">
+            <FiSave />
+            save
+          </button> */}
           </div>
         </div>
       </div>

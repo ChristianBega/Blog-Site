@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ADD_BLOG_POST } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
 import { useMutation } from "@apollo/client";
 
+// current logged in users id - can pass this to
+// console.log(currentUser.data._id);
 export default function AddBlogPost() {
-  // use queryMe to find the logged in user for the creator
-  // if no user then don't allow - optional chaining ?.
-
   const [currentUser, setCurrentUser] = useState(Auth.getProfile());
   const [formState, setFormState] = useState({ blogPost: "", blogTitle: "", creator: "" });
   const [addBlogPost, { error: mutationError, data: mutationData }] = useMutation(ADD_BLOG_POST);
@@ -16,9 +15,8 @@ export default function AddBlogPost() {
     // event.preventDefault();
     try {
       const { mutationData } = await addBlogPost({
-        variables: { ...formState, creator: currentUser?.data.username },
+        variables: { ...formState, creator: currentUser?.data.username, creatorId: currentUser?.data._id },
       });
-      return mutationData;
     } catch (e) {
       console.error(e);
     }
@@ -34,17 +32,15 @@ export default function AddBlogPost() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-control | flex flex-col items-center gap-4 | min-w-full">
-      <h2 text-5xl font-bold>
-        Create a blog post!
-      </h2>
+    <form onSubmit={handleSubmit} className="form-control | flex flex-col items-center gap-4 | min-w-full mb-5">
+      <h2 className="text-5xl font-bold text-center mb-5">Create a blog post!</h2>
       <input
         onChange={handleChange}
         value={formState.name}
         name="blogTitle"
         type="text"
         placeholder="Enter blog title here..."
-        className="input input-bordered input-accent w-full sm:max-w-xs md:max-w-md"
+        className="input input-bordered input-accent w-full max-w-md "
       />
 
       <textarea
@@ -52,7 +48,7 @@ export default function AddBlogPost() {
         value={formState.name}
         name="blogPost"
         placeholder="Add a blog post here..."
-        className="textarea textarea-bordered textarea-accent textarea-lg w-full sm:max-w-xs md:max-w-md"
+        className="textarea textarea-bordered textarea-accent textarea-lg w-full max-w-md "
       ></textarea>
 
       <button type="submit" value="submit" className="btn | mt-5">

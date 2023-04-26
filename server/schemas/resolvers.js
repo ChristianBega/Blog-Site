@@ -12,10 +12,12 @@ const resolvers = {
     User: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
     },
+
+    //! Todo - verify queryMe for finding current user is working
     // Finds the client side user and their context (data)
     Me: async (parent, args, contextValue) => {
-      console.log(contextValue.token);
-      if (contextValue) {
+      console.log("context", contextValue);
+      if (context) {
         return User.findOne({ _id: context.user._id });
       }
       throw new GraphQLError("You need to be logged in!");
@@ -36,7 +38,6 @@ const resolvers = {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       // Expected - {username, email, password} and jwt token
-      // console.log(user, token);
       return { user, token };
     },
     //! removeUser returns null in apollo sandbox and wont update database...
@@ -104,9 +105,10 @@ const resolvers = {
     //! create update comment resolver
 
     //! create an Add blog post resolver
+    //! Todo : verify add_blog_post is working with context
     // pass context.user._id
-    addBlogPost: async (parent, { blogPost, blogTitle, creator }) => {
-      return BlogPosts.create({ blogPost, blogTitle, creator });
+    addBlogPost: async (parent, { blogPost, blogTitle, creator, creatorId }, context) => {
+      return BlogPosts.create({ blogPost, blogTitle, creator, creatorId });
     },
 
     //! create an Update blog post resolver

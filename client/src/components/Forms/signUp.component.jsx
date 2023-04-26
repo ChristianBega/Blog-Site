@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [formState, setFormState] = useState({ username: "", email: "", password: "" });
-  const [addUser] = useMutation(ADD_USER);
+  const [addUser, { loading, error }] = useMutation(ADD_USER);
   let history = useNavigate();
 
   const handleFormSubmit = async (event) => {
@@ -31,11 +31,10 @@ export default function SignUp() {
       [name]: value,
     });
   };
-
   return (
     <section id="signup-hero" className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
+        <div className="text-center lg:text-left |  w-6/12 ">
           <h1 className="text-5xl font-bold">Sign up!</h1>
           <p className="py-6">
             Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
@@ -57,6 +56,7 @@ export default function SignUp() {
                 placeholder="username"
                 className="input input-bordered"
               />
+              {error ? <p className="mt-2 text-red-500">username required</p> : null}
             </div>
             {/* email input */}
             <div className="form-control">
@@ -64,6 +64,7 @@ export default function SignUp() {
                 <span className="label-text">Email</span>
               </label>
               <input onChange={handleChange} value={formState.email} name="email" type="text" placeholder="email" className="input input-bordered" />
+              {error ? <p className="mt-2 text-red-500">email required</p> : null}
             </div>
             {/* password input */}
             <div className="form-control">
@@ -78,6 +79,8 @@ export default function SignUp() {
                 placeholder="password"
                 className="input input-bordered"
               />
+              {error ? <p className="mt-2 text-red-500">password required</p> : null}
+
               <label className="label">
                 <Link to="/login" className="label-text-alt link link-hover">
                   Already have an account?
