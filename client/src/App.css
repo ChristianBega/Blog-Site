@@ -1,1 +1,6 @@
-
+.disabledLink {
+  pointer-events: none;
+}
+.disabledList {
+  cursor: not-allowed;
+}
