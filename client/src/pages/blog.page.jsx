@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-
+import "../App.css";
 // GraphQL
 import { useQuery } from "@apollo/client";
 import { QUERY_SINGLE_BLOG_POST, QUERY_SINGLE_PROFILE } from "../utils/queries";
@@ -40,42 +40,66 @@ export default function BlogPage() {
 
   const filterSocials = () => {
     let socials = singleUser.socials;
-    return socials?.map((social, socialUrl, socialPlatform) => {
-      socialUrl = social.socialLink;
-      socialPlatform = social.socialPlatform;
-      if (socialPlatform === "Twitter") {
-        return (
-          <li className="mt-2">
-            <a href={`${socialUrl}`} target="_blank" rel="noopener noreferrer">
+    console.log(socials);
+    if (socials === undefined) {
+      return (
+        <>
+          <li className="mt-2 disabledList">
+            <a className="disabledLink" target="_blank" rel="noopener noreferrer">
               <FiTwitter />
             </a>
           </li>
-        );
-      } else if (socialPlatform === "Github") {
-        return (
-          <li className="mt-2">
-            <a href={`${socialUrl}`} target="_blank" rel="noopener noreferrer">
+          <li className="mt-2 disabledList">
+            <a className="disabledLink" target="_blank" rel="noopener noreferrer">
               <FiGithub />
             </a>
           </li>
-        );
-      } else {
-        return (
-          <li className="mt-2">
-            <a href={`${socialUrl}`} target="_blank" rel="noopener noreferrer">
+          <li className="mt-2 disabledList">
+            <a className="disabledLink" target="_blank" rel="noopener noreferrer">
               <FiInstagram />
             </a>
           </li>
-        );
-      }
-    });
+        </>
+      );
+    } else {
+      return socials?.map((social, socialUrl, socialPlatform, index) => {
+        socialUrl = social.socialLink;
+        socialPlatform = social.socialPlatform;
+        if (socialPlatform === "Twitter") {
+          return (
+            <li key={index} className="mt-2">
+              <a href={`${socialUrl}`} target="_blank" rel="noopener noreferrer">
+                <FiTwitter />
+              </a>
+            </li>
+          );
+        } else if (socialPlatform === "Github") {
+          return (
+            <li key={index} className="mt-2">
+              <a href={`${socialUrl}`} target="_blank" rel="noopener noreferrer">
+                <FiGithub />
+              </a>
+            </li>
+          );
+        } else {
+          return (
+            <li key={index} className="mt-2">
+              <a href={`${socialUrl}`} target="_blank" rel="noopener noreferrer">
+                <FiInstagram />
+              </a>
+            </li>
+          );
+        }
+      });
+    }
   };
 
   return (
-    <section className=" min-h-screen flex flex-col items-center | mt-10 p-4" creatorid={singleBlogPost.creatorId} blogid={currentBlogID}>
-      <div className="card bg-base-200 shadow-xl p-4 | flex  justify-between w-auto">
-        <div className="flex gap-6">
-          <div className="card-title flex gap-4">
+    <section className="min-h-screen flex flex-col items-center |  mt-10 p-4" creatorid={singleBlogPost.creatorId} blogid={currentBlogID}>
+      <div className="card bg-base-200 shadow-xl p-4 | flex items-center w-10/12 md:w-8/12 lg:w-8/12 lg:max-w-2xl ">
+        {/* Blog Header */}
+        <div className="flex gap-6 justify-between lg:justify-center w-11/12">
+          <div className="card-title flex gap-4 lg:w-1/2">
             <div className="avatar">
               <div className="w-12 rounded-full">
                 <img src={StaticImg} />
@@ -86,15 +110,15 @@ export default function BlogPage() {
               <small>{singleBlogPost.createdAt}</small>
             </div>
           </div>
-          <ul className="flex gap-4">{filterSocials()}</ul>
+          <ul className="flex gap-4 justify-end lg:w-1/3">{filterSocials()}</ul>
         </div>
       </div>
-
-      <div className="card bg-base-200 shadow-xl p-4 |flex  justify-center max-w-lg | mt-5">
+      {/* Blog Post Card */}
+      <div className="card bg-base-200 shadow-xl p-4 mt-5 | flex min-h-fit w-10/12 md:w-8/12 lg:w-8/12 lg:max-w-2xl">
         <div className="mt-5 ">
           <h1 className="text-3xl text-center">{singleBlogPost.blogTitle}</h1>
         </div>
-        <div className="mt-5">
+        <div className=" card bg-slate-50 min-h-fit | mt-5 p-4">
           <p>{singleBlogPost.blogPost}</p>
         </div>
       </div>
