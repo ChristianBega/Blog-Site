@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../App.css";
+import StaticRobotoUserImg from "../assets/robotUserImg.jpeg";
 // GraphQL
 import { useQuery } from "@apollo/client";
 import { QUERY_SINGLE_BLOG_POST, QUERY_SINGLE_PROFILE } from "../utils/queries";
@@ -19,14 +20,13 @@ export default function BlogPage() {
   const { loading: blogLoading, error: blogError, data: blogData } = useQuery(QUERY_SINGLE_BLOG_POST, { variables: { blogId: currentBlogID } });
   // Response from QUERY SINGLE BLOG POST
   const singleBlogPost = blogData?.BlogPost || [];
-  // console.log(singleBlogPost);
+
   // QUERY SINGLE USER by ID (creatorID)
   const {
     loading: userLoading,
     error: userError,
     data: userData,
   } = useQuery(QUERY_SINGLE_PROFILE, { variables: { userId: singleBlogPost?.creatorId } });
-
   // Response from QUERY SINGLE Post
   const singleUser = userData?.User || [];
 
@@ -40,7 +40,7 @@ export default function BlogPage() {
 
   const filterSocials = () => {
     let socials = singleUser.socials;
-    console.log(socials);
+    // console.log(socials);
     if (socials === undefined) {
       return (
         <>
@@ -94,8 +94,43 @@ export default function BlogPage() {
     }
   };
 
+  const renderComments = () => {
+    let blogComments = singleBlogPost.comments;
+
+    if (blogComments <= 0) {
+      return (
+        <div className="chat chat-start | flex flex-row justify-center	">
+          <div className="chat-image avatar">
+            <div className="w-10 rounded-full">
+              <img src={StaticRobotoUserImg} />
+            </div>
+          </div>
+          <div className="chat-bubble | w-11/12">No comments left! Be the first :D</div>
+        </div>
+      );
+    } else {
+      return blogComments?.map((singleComment, index) => {
+        return (
+          <div className="chat chat-start">
+            <div key={index} className="chat-image avatar">
+              <div className="w-10 rounded-full">
+                <img src={StaticRobotoUserImg} />
+              </div>
+            </div>
+            <div className="chat-header my-2">
+              Obi-Wan Kenobi
+              <time className="ml-2 text-xs opacity-50">12:45</time>
+            </div>
+            <div className="chat-bubble | min-w-full">{singleComment.commentText}</div>
+          </div>
+        );
+      });
+    }
+  };
+
   return (
     <section className="min-h-screen flex flex-col items-center |  mt-10 p-4" creatorid={singleBlogPost.creatorId} blogid={currentBlogID}>
+      {/* Blog Card Header */}
       <div className="card bg-base-200 shadow-xl p-4 | flex items-center w-10/12 md:w-8/12 lg:w-8/12 lg:max-w-2xl ">
         {/* Blog Header */}
         <div className="flex gap-6 justify-between lg:justify-center w-11/12">
@@ -110,6 +145,7 @@ export default function BlogPage() {
               <small>{singleBlogPost.createdAt}</small>
             </div>
           </div>
+          {/* Filter socials */}
           <ul className="flex gap-4 justify-end lg:w-1/3">{filterSocials()}</ul>
         </div>
       </div>
@@ -121,6 +157,14 @@ export default function BlogPage() {
         <div className=" card bg-slate-50 min-h-fit | mt-5 p-4">
           <p>{singleBlogPost.blogPost}</p>
         </div>
+      </div>
+      {/* Blog Comments */}
+      <div className="card bg-base-200 shadow-xl p-4 mt-5 | flex min-h-fit w-10/12 md:w-8/12 lg:w-8/12 lg:max-w-2xl">
+        <div className="my-5">
+          <h2 className="text-3xl text-center">Comments</h2>
+        </div>
+        {/* Render blog comments */}
+        {renderComments()}
       </div>
     </section>
   );
