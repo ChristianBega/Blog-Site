@@ -51,3 +51,17 @@ export const ADD_BLOG_POST = gql`
     }
   }
 `;
+
+// Mutation to add a comment to a blog post - blogPostId and commentText required
+export const ADD_COMMENT = gql`
+  mutation AddComment($blogPostId: ID!, $commentText: String!, $creatorId: String!, $creator: String!) {
+    addComment(blogPostId: $blogPostId, commentText: $commentText, creatorId: $creatorId, creator: $creator) {
+      _id
+      comments {
+        commentText
+      }
+      creator
+      creatorId
+    }
+  }
+`;

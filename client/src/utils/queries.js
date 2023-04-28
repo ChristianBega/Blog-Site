@@ -62,10 +62,11 @@ export const QUERY_SINGLE_BLOG_POST = gql`
       comments {
         commentText
         createdAt
+        creator
+        creatorId
       }
       createdAt
       creator
-      creatorId
     }
   }
 `;

@@ -31,6 +31,14 @@ const blogPostSchema = new Schema({
         minLength: 1,
         maxLength: 280,
       },
+      creatorId: {
+        type: String,
+        required: true,
+      },
+      creator: {
+        type: String,
+        required: true,
+      },
       createdAt: {
         type: Date,
         default: Date.now,

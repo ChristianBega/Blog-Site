@@ -85,11 +85,11 @@ const resolvers = {
     },
 
     // Add comment
-    addComment: async (parent, { blogPostId, commentText }) => {
+    addComment: async (parent, { blogPostId, commentText, creatorId, creator }) => {
       return BlogPosts.findOneAndUpdate(
         { _id: blogPostId },
         {
-          $addToSet: { comments: { commentText } },
+          $addToSet: { comments: { commentText, creatorId, creator } },
         },
         {
           new: true,
