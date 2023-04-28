@@ -85,11 +85,11 @@ const resolvers = {
     },
 
     // Add comment
-    addComment: async (parent, { blogPostId, commentText }) => {
+    addComment: async (parent, { blogPostId, commentText, creatorId, creator }) => {
       return BlogPosts.findOneAndUpdate(
         { _id: blogPostId },
         {
-          $addToSet: { comments: { commentText } },
+          $addToSet: { comments: { commentText, creatorId, creator } },
         },
         {
           new: true,
@@ -105,8 +105,6 @@ const resolvers = {
     //! create update comment resolver
 
     //! create an Add blog post resolver
-    //! Todo : verify add_blog_post is working with context
-    // pass context.user._id
     addBlogPost: async (parent, { blogPost, blogTitle, creator, creatorId }, context) => {
       return BlogPosts.create({ blogPost, blogTitle, creator, creatorId });
     },

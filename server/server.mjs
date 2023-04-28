@@ -22,7 +22,9 @@ const server = new ApolloServer({
   resolvers,
 });
 
+// async
 // Apollo standalone server instance
+
 const { url } = await startStandaloneServer(server, {
   context: async ({ req, res }) => {
     req;

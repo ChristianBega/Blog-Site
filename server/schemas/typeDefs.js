@@ -43,6 +43,8 @@ const typeDefs = `
   type Comment {
     _id: ID
     commentText: String
+    creator: String
+    creatorId: String
     createdAt : String
   }
 
@@ -61,7 +63,8 @@ const typeDefs = `
     
     login(email: String!, password: String!): Auth
     
-    addComment(blogPostId: ID!, commentText: String!): BlogPost
+    addComment(blogPostId: ID!, commentText: String!, creatorId: String!, creator: String!): BlogPost
+
     removeComment(blogPostId: ID!, commentId: ID!): BlogPost
 
     addBlogPost(blogPost: String!, blogTitle: String!, creator: String!, creatorId: String!): BlogPost
